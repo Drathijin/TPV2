@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "Transform.h"
+#include "BulletPool.h"
 class BulletViewer :
 	public Component
 {

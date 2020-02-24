@@ -12,7 +12,10 @@ void Gun::update()
 	{
 		if (EH->isKeyDown(SDLK_SPACE))
 		{
-			GETCMP1_(BulletPool)->shoot();
+			Vector2D pos = tr_->getPos();
+			//pos.setX(-cos(tr_->getRot() + 90) * tr_->getW() + (pos.getX()));
+			//pos.setY(sin(tr_->getRot() ) * tr_->getH() + (pos.getY()));
+			GETCMP1_(BulletPool)->shoot(pos,tr_->getRot(),10,10);
 		}
 	}
 }

@@ -5,7 +5,7 @@ class Gun :
 	public Component
 {
 public:
-	Gun() :Component(ecs::Gun) {} ;
+	Gun() :Component(ecs::Gun),tr_(nullptr){} ;
 	~Gun() {};
 
 	void update()override;

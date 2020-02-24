@@ -16,6 +16,10 @@
 
 #include "SDLGame.h"
 #include "FighterMotion.h"
+#include "BulletPool.h"
+#include "BulletViewer.h"
+#include "BulletMotion.h"
+#include "Gun.h"
 
 
 
@@ -44,8 +48,11 @@ void Asteroids::initGame()
 	caza->addComponent<FighterCtrl>();
 	caza->addComponent<FighterViewer>();
 	caza->addComponent<Health>();
+	caza->addComponent<Gun>();
 
-	Entity* bullets = entityManager_->addEntity();
+	caza->addComponent<BulletPool>();
+	caza->addComponent<BulletViewer>();
+	caza->addComponent<BulletMotion>();
 	
 
 	cazaTr->setPos(5, game_->getWindowHeight() / 2 - 25);

@@ -10,9 +10,9 @@
 
 class BulletPool : public Component
 {
-
+public:
 	BulletPool() :Component(ecs::BulletPool), bullets([](Bullet* b) {return b->inUse(); }) {};
-	~BulletPool();
+	~BulletPool() {};
 
 	void shoot(Vector2D pos, double r, double w, double h);
 	void disableAll() { vector <Bullet*> v = getPool(); for (Bullet* bullet : v) { bullet->setInUse(false); } };
