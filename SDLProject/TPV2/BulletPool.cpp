@@ -12,7 +12,7 @@ void BulletPool::shoot(Vector2D pos, double r, double w, double h)
 			b->rot = r;
 			b->w = w;
 			b->h = h;
-			b->vel = Vector2D(0, -1).rotate(r) * 10;
+			b->vel = Vector2D(0, -1).rotate(r) * 2;
 			lastShot = time;
 			b->setInUse(true);
 		}

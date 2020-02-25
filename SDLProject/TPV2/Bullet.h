@@ -3,7 +3,7 @@
 class Bullet
 {
 public:
-	Bullet(): vel(0,0),pos(0,0),rot(0),w(0),h(0),enabled(0){};
+	Bullet(): vel(0,0),pos(0,0),rot(0),w(0),h(0),enabled_(0){};
 	~Bullet() {};
 
 	Vector2D vel;
@@ -11,9 +11,9 @@ public:
 	double rot;
 	double w;
 	double h;
-	bool inUse() { return enabled; };
-	void setInUse(bool t) { enabled = t; };
+	bool inUse() { return enabled_; };
+	void setInUse(bool t) { enabled_ = t; };
 private:
-	bool enabled;
+	bool enabled_;
 };
 
