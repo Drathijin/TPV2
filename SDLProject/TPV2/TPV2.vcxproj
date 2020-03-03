@@ -19,7 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Asteroid.h" />
+    <ClInclude Include="AsteroidPool.h" />
     <ClInclude Include="Asteroids.h" />
+    <ClInclude Include="AsteroidsMotion.h" />
+    <ClInclude Include="AsteroidsViewer.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="BallMoveBehaviour.h" />
     <ClInclude Include="Bullet.h" />
@@ -66,7 +70,11 @@
     <ClInclude Include="VelocityVectorViewer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Asteroid.cpp" />
+    <ClCompile Include="AsteroidPool.cpp" />
     <ClCompile Include="Asteroids.cpp" />
+    <ClCompile Include="AsteroidsMotion.cpp" />
+    <ClCompile Include="AsteroidsViewer.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="BallMoveBehaviour.cpp" />
     <ClCompile Include="Bullet.cpp" />

@@ -2,9 +2,10 @@
 #include "Vector2D.h"
 class Asteroid
 {
-	const int MAX_GENERATIONS = 3;
 public:
-	Asteroid() : vel_(), pos_(), rot_(0), w_(0), h_(0), gens_(0), enabled_(false) {};
+
+	static const int MAX_GENERATIONS = 3;
+	Asteroid() : vel_(), pos_(), rot_(0), w_(40), h_(40), gens_(0), enabled_(false) {};
 	Asteroid(Vector2D vel, Vector2D pos, double rot = 0.0, double w = 40.0, double h = 40.0, int gens = 0) 
 	{ vel_ = vel; pos_ = pos; rot_ = rot; w_ = w; h_ = h; gens_ = gens;}
 	~Asteroid() {};
@@ -17,7 +18,7 @@ public:
 	int gens_;
 	bool inUse() { return enabled_; };
 	void setInUse(bool t) { enabled_ = t; };
-
+	void setSize() { w_ = 10.0 + 3.0 * gens_; h_ = w_; };
 private:
 	bool enabled_;
 };

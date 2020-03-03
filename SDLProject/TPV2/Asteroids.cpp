@@ -14,6 +14,10 @@
 #include "Transform.h"
 #include "ecs.h"
 
+#include "AsteroidPool.h"
+#include "AsteroidsMotion.h"
+#include "AsteroidsViewer.h"
+
 #include "SDLGame.h"
 #include "FighterMotion.h"
 #include "BulletPool.h"
@@ -37,7 +41,7 @@ Asteroids::~Asteroids()
 
 void Asteroids::initGame()
 {
-	game_ = SDLGame::init("Ping Pong", _WINDOW_WIDTH_, _WINDOW_HEIGHT_);
+	game_ = SDLGame::init("Asteroids", _WINDOW_WIDTH_, _WINDOW_HEIGHT_);
 
 	entityManager_ = new EntityManager(game_);
 
@@ -57,6 +61,16 @@ void Asteroids::initGame()
 
 	cazaTr->setPos(5, game_->getWindowHeight() / 2 - 25);
 	cazaTr->setWH(160, 160);
+
+
+	Entity*  Asteroids= entityManager_->addEntity();
+	Asteroids->addComponent<AsteroidPool>()->generateAsteroids(1);
+	Asteroids->addComponent<AsteroidsMotion>();
+	Asteroids->addComponent<AsteroidsViewer>();
+	
+
+
+
 }
 void Asteroids::update() {
 	entityManager_->update();

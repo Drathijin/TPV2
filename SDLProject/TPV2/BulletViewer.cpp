@@ -2,7 +2,7 @@
 #include "BulletPool.h"
 #include "Entity.h"
 
-BulletViewer::BulletViewer() :Component(ecs::FighterViewer)
+BulletViewer::BulletViewer() :Component(ecs::BulletViewer), bp_(nullptr)
 {
 }
 BulletViewer::~BulletViewer()
