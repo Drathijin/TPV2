@@ -4,49 +4,29 @@
 
 class ScoreManager: public Component {
 public:
+	enum GameState
+	{
+		Paused,
+		Playing,
+		Finished,
+		Unfinished
+	};
+
 	ScoreManager();
-	ScoreManager(int rounds);
 	virtual ~ScoreManager();
 
-	int getLeftScore() const {
-		return leftScore_;
-	}
 
-	void setLeftScore(int leftScore) {
-		leftScore_ = leftScore;
-	}
 
-	int getRightScore() const {
-		return rightScore_;
-	}
+	int getScore() { return score_; }
+	void setScore(int s) { score_ = s; };
 
-	void setRightScore(int rightScore) {
-		rightScore_ = rightScore;
-	}
-
-	int getRounds() const {
-		return rounds_;
-	}
-
-	void setRounds(int rounds) {
-		rounds_ = rounds;
-	}
-
-	bool isRunning() const {
-		return running_;
-	}
-
-	void setRunning(bool running) {
-		running_ = running;
-	}
-
-	bool isGameOver() {
-		return leftScore_ == rounds_ || rightScore_ == rounds_;
-	}
+	GameState getGameState() { return gameState_; };
+	void setGameState(GameState gs) { gameState_ = gs; };
+	
+	void virtual draw() override;
 
 private:
-	bool running_;
-	int leftScore_;
-	int rightScore_;
-	int rounds_;
+	int score_;
+	GameState gameState_;
+
 };
