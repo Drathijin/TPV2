@@ -20,8 +20,11 @@ void BulletViewer::draw()
 	std::vector<Bullet *> v = static_cast<BulletPool*>(bp_)->getPool();
 	for (Bullet* bullet : v)
 	{
-		SDL_Rect dest = { bullet->pos.getX(), bullet->pos.getY(), bullet->w,bullet->h };
-		game_->getTextureMngr()->getTexture(Resources::TennisBall)->render(dest, bullet->rot);
+		if (bullet->inUse())
+		{
+			SDL_Rect dest = { bullet->pos.getX(), bullet->pos.getY(), bullet->w,bullet->h };
+			game_->getTextureMngr()->getTexture(Resources::TennisBall)->render(dest, bullet->rot);
+		}
 	}
 
 }

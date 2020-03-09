@@ -50,8 +50,9 @@ void AsteroidPool::disableAll()
 void AsteroidPool::onCollision(Asteroid* a, Bullet* b)
 {
 	a->setInUse(false);
+	b->setInUse(false);
 
-	/*if (a->gens_ >= 0)
+	if (a->gens_ >= 0)
 	{
 		for (int i = 0; i < 2; i++)
 		{
@@ -59,15 +60,15 @@ void AsteroidPool::onCollision(Asteroid* a, Bullet* b)
 
 			Vector2D v = a->vel_.rotate(i * 45.0);
 			Vector2D p = a->pos_ + v.normalize();
-			RandomNumberGenerator* ran = game_->getRandGen();
 
-			newAsteroid->setSize();
+			newAsteroid->pos_ = p;
+			newAsteroid->vel_ = v;
 			newAsteroid->rot_ = a->rot_ + i * 45.0;
-			newAsteroid->setInUse(true);
 			newAsteroid->gens_ = a->gens_ - 1;
+			newAsteroid->setInUse(true); 
+			newAsteroid->setSize();
 		}
-		//numAsteroids++;
+		numAsteroids++;
 	}
-	else numAsteroids--;*/
-	numAsteroids--;
+	else numAsteroids--;
 }

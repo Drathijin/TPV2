@@ -18,20 +18,28 @@ void ScoreViewer::init() {
 
 void ScoreViewer::draw() {
 	string message;
+	SDL_Color mColor;
 	if (scoreManager_->isFinished())
 	{
-		if (scoreManager_->fighterWon())message = "Has ganado!";
-		else message = "Has perdido!";
-		Texture text = Texture(game_->getRenderer(), message, *game_->getFontMngr()->getFont(Resources::ARIAL24), { 255,255,255,255 });
-		text.render(game_->getWindowWidth()/2 - (text.getWidth()/2), 6 * game_->getWindowHeight() / 8 - (text.getHeight()));
+		if (scoreManager_->fighterWon())
+		{
+			message = "You win!";
+			mColor = { 125,200,125,255 };
+		}
+		else {
+			message = "You Lose!";
+			mColor = { 200,125,125,255 };
+		}
+		Texture text = Texture(game_->getRenderer(), message, *game_->getFontMngr()->getFont(Resources::ARIAL24),mColor);
+		text.render(game_->getWindowWidth()/2 - (text.getWidth()/2), 5 * game_->getWindowHeight() / 8 - (text.getHeight()));
 	}
-	else if(!scoreManager_->isPlaying())
+	if(!scoreManager_->isPlaying())
 	{
-		message = "Presione cualquier tecla para empezar";
+		message = "Press any key to start.";
 		Texture text = Texture(game_->getRenderer(), message, *game_->getFontMngr()->getFont(Resources::ARIAL24), { 255,255,255,255 });
 		text.render(game_->getWindowWidth() / 2 - (text.getWidth() / 2), 6 * game_->getWindowHeight() / 8 - (text.getHeight()));
 	}
-	message = to_string(scoreManager_->getScore());
+	message = "score: " + to_string(scoreManager_->getScore());
 	Texture t = Texture(game_->getRenderer(), message, *game_->getFontMngr()->getFont(Resources::ARIAL24), { 255,0,255,255 });
 	t.render(game_->getWindowWidth() / 2 - (t.getWidth() / 2),  game_->getWindowHeight() / 8 - (t.getHeight()));
 }

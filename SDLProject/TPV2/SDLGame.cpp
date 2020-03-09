@@ -44,8 +44,7 @@ void SDLGame::initSDL() {
 	assert(renderer_ != nullptr);
 
 	// Clear screen (background color).
-	int sdlSetDrawColor_ret = SDL_SetRenderDrawColor(renderer_, 0, 100, 100,
-			255);  // Dark grey.
+	int sdlSetDrawColor_ret = SDL_SetRenderDrawColor(renderer_, 0, 100, 100, 100);  // Dark grey.
 	assert(sdlSetDrawColor_ret != -1);
 	int sdlRenderClear_ret = SDL_RenderClear(renderer_);
 	assert(sdlRenderClear_ret != -1);
