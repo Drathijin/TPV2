@@ -29,7 +29,7 @@ void GameLogic::update() {
 					asteroidPool_->disableAll();
 					bulletsPool_->disableAll();
 					scoreManager_->setPlaying(false);
-
+					game_->getAudioMngr()->pauseMusic();
 					if (health_->kill() == 0)
 					{
 						scoreManager_->setFinished(true);

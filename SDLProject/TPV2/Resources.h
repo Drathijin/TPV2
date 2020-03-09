@@ -33,10 +33,11 @@ public:
 		Beat,
 		Cheer,
 		Boooo,
+		Imperial_March,
 
 		// sound effects
-		Wall_Hit,
-		Paddle_Hit
+		Explosion,
+		GunShot
 	};
 
 	enum FontId : int {

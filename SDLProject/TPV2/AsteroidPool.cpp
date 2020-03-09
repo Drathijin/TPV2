@@ -50,6 +50,7 @@ void AsteroidPool::disableAll()
 void AsteroidPool::onCollision(Asteroid* a, Bullet* b)
 {
 	a->setInUse(false);
+	game_->getAudioMngr()->playChannel(Resources::Explosion, 0);
 
 	/*if (a->gens_ >= 0)
 	{

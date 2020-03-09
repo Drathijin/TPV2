@@ -128,7 +128,8 @@ void Asteroids::closeGame() {
 
 void Asteroids::start() {
 	exit_ = false;
-
+	//game_->getAudioMngr()->playChannel(Resources::GunShot, 0);
+	game_->getAudioMngr()->playMusic(Resources::Imperial_March);
 	while (!exit_) {
 		Uint32 startTime = game_->getTime();
 
@@ -140,4 +141,5 @@ void Asteroids::start() {
 		if (frameTime < 10)
 			SDL_Delay(10 - frameTime);
 	}
+	game_->getAudioMngr()->haltMusic();
 }
