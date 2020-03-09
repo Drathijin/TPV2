@@ -17,10 +17,12 @@ public:
 	void setPlaying(bool b) { playing_ = b; };
 	void setFinished(bool b) { finished_ = b; };
 
-
+	bool fighterWon() { return fighterWinner; };
+	virtual void update();
 private:
 	int score_;
 	bool playing_ = true;
 	bool finished_ = false;
+	bool fighterWinner = false;
 
 };

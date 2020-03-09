@@ -20,12 +20,12 @@ void AsteroidsViewer::init()
 void AsteroidsViewer::draw()
 {
 	std::vector<Asteroid*> v = (ap_)->getPool();
-	for (Asteroid* bullet : v)
+	for (Asteroid* a : v)
 	{
-		if (bullet->inUse())
+		if (a->inUse())
 		{
-			SDL_Rect dest = { bullet->pos_.getX(), bullet->pos_.getY(), bullet->w_,bullet->h_ };
-			game_->getTextureMngr()->getTexture(Resources::Asteroid)->render(dest, bullet->rot_);
+			SDL_Rect dest = { a->pos_.getX(), a->pos_.getY(), a->w_,a->h_ };
+			game_->getTextureMngr()->getTexture(Resources::Asteroid)->render(dest, a->rot_);
 		}
 	}
 

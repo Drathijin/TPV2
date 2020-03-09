@@ -20,6 +20,6 @@ public:
 	void setInUse(bool t) { enabled_ = t; };
 	void setSize() { w_ = 10.0 + 3.0 * gens_; h_ = w_; };
 private:
-	bool enabled_;
+	bool enabled_=false;
 };
 

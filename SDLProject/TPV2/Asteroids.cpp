@@ -60,7 +60,7 @@ void Asteroids::initGame()
 	caza->addComponent<BulletViewer>();
 	caza->addComponent<BulletMotion>();
 	
-	cazaTr->setWH(160, 160);
+	cazaTr->setWH(20, 20);
 	cazaTr->setPos(game_->getWindowWidth() / 2 - cazaTr->getW() / 2,
 		game_->getWindowHeight() / 2 - cazaTr->getH() / 2);
 

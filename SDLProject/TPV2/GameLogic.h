@@ -16,8 +16,12 @@ public:
 
 	}
 	virtual ~GameLogic();
+	
 	void init() override;
 	void update() override;
+	
+	void resetFighter();
+	void createAsteroids();
 private:
 
 	AsteroidPool* asteroidPool_;
@@ -26,6 +30,5 @@ private:
 	Health* health_;
 	Transform* fighterTr_;
 	ScoreManager *scoreManager_;
-	bool fighterWinner = false;
 };
 

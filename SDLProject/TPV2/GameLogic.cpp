@@ -9,31 +9,35 @@ GameLogic::~GameLogic() {
 
 void GameLogic::init() {
 	scoreManager_ = GETCMP1_(ScoreManager);
+	createAsteroids();
 }
-
+void GameLogic::createAsteroids()
+{
+	asteroidPool_->generateAsteroids(10);
+}
 void GameLogic::update() {
 	if (scoreManager_->isPlaying())
 	{
 		auto aP = asteroidPool_->getPool();
 		for (auto a : aP)
 		{
+			if (!a->inUse())break;
 			if (Collisions::collidesWithRotation(a->pos_, a->w_, a->h_, a->rot_, fighterTr_->getPos(), 
 				fighterTr_->getW(), fighterTr_->getH(), fighterTr_->getRot()))
 			{
 				asteroidPool_->disableAll();
 				bulletsPool_->disableAll();
 				scoreManager_->setPlaying(false);
+
 				if (health_->kill() == 0)
 				{
 					scoreManager_->setFinished(true);
-					fighterWinner = false;
+					health_->reset();
+					//fighterWinner = false;
 				}
 				else
 				{
-					fighterTr_->setPos(game_->getWindowWidth() / 2 - fighterTr_->getW() / 2,
-						game_->getWindowHeight() / 2 - fighterTr_->getH() / 2);
-					fighterTr_->setVel(0, 0);
-					fighterTr_->setRot(0);
+					resetFighter();
 				}
 			}
 			else
@@ -54,5 +58,13 @@ void GameLogic::update() {
 	{
 		asteroidPool_->disableAll();
 	}
+}
+
+void GameLogic::resetFighter()
+{
+	fighterTr_->setPos(game_->getWindowWidth() / 2 - fighterTr_->getW() / 2,
+		game_->getWindowHeight() / 2 - fighterTr_->getH() / 2);
+	fighterTr_->setVel(0, 0);
+	fighterTr_->setRot(0);
 }
 
