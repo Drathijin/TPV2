@@ -7,32 +7,32 @@ void AsteroidPool::generateAsteroids(int n)
 	for (int i = 0; i < n; i++)
 	{
 		a = pool_.getObj();
-
-		RandomNumberGenerator *ran = game_->getRandGen();
-		bool horizontal = ran->nextInt(0, 2);
-		bool which = ran->nextInt(0, 2);
-		Vector2D pos;
-		double value=0;
-		if (horizontal)
+		if (a != nullptr)
 		{
-			value = ran->nextInt(0, game_->getWindowWidth());
-			pos = Vector2D(value, game_->getWindowHeight() * (int)which);
+			RandomNumberGenerator* ran = game_->getRandGen();
+			bool horizontal = ran->nextInt(0, 2);
+			bool which = ran->nextInt(0, 2);
+			Vector2D pos;
+			double value = 0;
+			if (horizontal)
+			{
+				value = ran->nextInt(0, game_->getWindowWidth());
+				pos = Vector2D(value, game_->getWindowHeight() * (int)which);
+			}
+			else
+			{
+				value = ran->nextInt(0, game_->getWindowHeight());
+				pos = Vector2D(game_->getWindowWidth() * (int)which, value);
+			}
+			Vector2D c((game_->getWindowWidth() / 2 - ran->nextInt(-100, 100)), game_->getWindowHeight() / 2 - (ran->nextInt(-100, 100)));
+			int m = ran->nextInt(1, 2);
+			a->vel_ = (c - pos).normalize(); a->vel_ = a->vel_ * (m);
+			a->pos_ = pos;
+			a->gens_ = ran->nextInt(1, Asteroid::MAX_GENERATIONS);
+			a->setSize();
+			a->rot_ = ran->nextInt(0, 359);
+			a->setInUse(true);
 		}
-		else
-		{
-			value = ran->nextInt(0, game_->getWindowHeight());
-			pos = Vector2D(game_->getWindowWidth() * (int)which, value);
-		}
-		Vector2D c((game_->getWindowWidth()/2- ran->nextInt(-100,100)), game_->getWindowHeight() / 2 - ( ran->nextInt(-100,100)));
-		int m = ran->nextInt(1, 2);
-		a->vel_ = (c - pos).normalize();a->vel_=a->vel_*(5);
-		cout << a->vel_;
-		a->pos_ = pos;
-		a->gens_ = ran->nextInt(1, Asteroid::MAX_GENERATIONS);
-		a->setSize();
-		a->rot_ = ran->nextInt(0, 359);
-		a->setInUse(true);
-
 	}
 	numAsteroids += n;
 }
@@ -44,13 +44,14 @@ void AsteroidPool::disableAll()
 	{
 		a->setInUse(false);
 	}
+	numAsteroids = 0;
 }
 
 void AsteroidPool::onCollision(Asteroid* a, Bullet* b)
 {
 	a->setInUse(false);
 
-	if (a->gens_ >= 0)
+	/*if (a->gens_ >= 0)
 	{
 		for (int i = 0; i < 2; i++)
 		{
@@ -65,7 +66,9 @@ void AsteroidPool::onCollision(Asteroid* a, Bullet* b)
 			newAsteroid->setInUse(true);
 			newAsteroid->gens_ = a->gens_ - 1;
 		}
-	numAsteroids++;
+		//numAsteroids++;
 	}
-	else numAsteroids--;
+	else numAsteroids--;*/
+	numAsteroids--;
+	cout << numAsteroids<<endl;
 }

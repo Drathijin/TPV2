@@ -17,7 +17,6 @@ void FighterMotion::draw()
 			if (abs(newVel.getX()) < 0.1 && abs(newVel.getY()) < 0.1)
 			{
 				newVel = Vector2D(0, 0);
-				std::cout << "Aparcado\n";
 			}
 			tc->setVel(newVel);
 		}

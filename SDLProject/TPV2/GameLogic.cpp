@@ -21,37 +21,38 @@ void GameLogic::update() {
 		auto aP = asteroidPool_->getPool();
 		for (auto a : aP)
 		{
-			if (!a->inUse())break;
-			if (Collisions::collidesWithRotation(a->pos_, a->w_, a->h_, a->rot_, fighterTr_->getPos(), 
-				fighterTr_->getW(), fighterTr_->getH(), fighterTr_->getRot()))
+			if (a->inUse())
 			{
-				asteroidPool_->disableAll();
-				bulletsPool_->disableAll();
-				scoreManager_->setPlaying(false);
-
-				if (health_->kill() == 0)
+				if (Collisions::collidesWithRotation(a->pos_, a->w_, a->h_, a->rot_, fighterTr_->getPos(),
+					fighterTr_->getW(), fighterTr_->getH(), fighterTr_->getRot()))
 				{
-					scoreManager_->setFinished(true);
-					health_->reset();
-					//fighterWinner = false;
+					asteroidPool_->disableAll();
+					bulletsPool_->disableAll();
+					scoreManager_->setPlaying(false);
+
+					if (health_->kill() == 0)
+					{
+						scoreManager_->setFinished(true);
+						health_->reset();
+						//fighterWinner = false;
+					}
+					else
+					{
+						resetFighter();
+					}
 				}
 				else
 				{
-					resetFighter();
-				}
-			}
-			else
-			{
-				auto bP = bulletsPool_->getPool();
-				for (auto b : bP)
-				{
-					if (Collisions::collidesWithRotation(a->pos_, a->w_, a->h_, a->rot_, b->pos, b->w, b->h, b->rot))
+					auto bP = bulletsPool_->getPool();
+					for (auto b : bP)
 					{
-						asteroidPool_->onCollision(a, b);
+						if (Collisions::collidesWithRotation(a->pos_, a->w_, a->h_, a->rot_, b->pos, b->w, b->h, b->rot))
+						{
+							asteroidPool_->onCollision(a, b);
+						}
 					}
 				}
 			}
-
 		}
 	}
 	else
