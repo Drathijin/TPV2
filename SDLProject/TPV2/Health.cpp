@@ -13,8 +13,8 @@ Health::~Health()
 void Health::draw()
 {
 	Texture* text = game_->getTextureMngr()->getTexture(Resources::Heart);
-	int w = text->getWidth();
-	int h= text->getHeight();
+	int w = text->getWidth()/4;
+	int h = text->getHeight()/4;
 
 	for (size_t i = 0; i < lives_; i++)
 	{

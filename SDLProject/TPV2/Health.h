@@ -8,7 +8,7 @@ public:
 	~Health();
 
 
-	inline int kill() { return --lives_; };
+	inline int kill() { lives_--; return lives_; };
 	inline void reset() { lives_ = 3; };
 	void draw();
 	inline int getLives() { return lives_; }

@@ -70,5 +70,4 @@ void AsteroidPool::onCollision(Asteroid* a, Bullet* b)
 	}
 	else numAsteroids--;*/
 	numAsteroids--;
-	cout << numAsteroids<<endl;
 }

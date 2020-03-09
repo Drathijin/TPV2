@@ -9,6 +9,7 @@ public:
 	virtual ~ScoreManager();
 	
 	int getScore() { return score_; }
+	void addScore(int points=1) { score_+=points; }
 	void setScore(int s) { score_ = s; };
 
 	bool isPlaying() { return playing_; };
@@ -18,6 +19,7 @@ public:
 	void setFinished(bool b) { finished_ = b; };
 
 	bool fighterWon() { return fighterWinner; };
+	void setWinner(bool b) { fighterWinner = b; }
 	virtual void update();
 private:
 	int score_;
