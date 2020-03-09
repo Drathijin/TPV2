@@ -18,11 +18,4 @@ void ScoreViewer::init() {
 
 void ScoreViewer::draw() {
 
-	Texture score(game_->getRenderer(),
-			to_string(scoreManager_->getLeftScore()) + " - "
-					+ to_string(scoreManager_->getRightScore()),
-			*(game_->getFontMngr()->getFont(Resources::ARIAL24)),
-			{ COLOR(0x111122ff) });
-	score.render(game_->getRenderer(),
-			game_->getWindowWidth() / 2 - score.getWidth() / 2, 10);
 }

@@ -24,6 +24,8 @@
 #include "BulletViewer.h"
 #include "BulletMotion.h"
 #include "Gun.h"
+#include "GameLogic.h"
+#include "ScoreViewer.h"
 
 
 
@@ -51,22 +53,28 @@ void Asteroids::initGame()
 	caza->addComponent<FighterMotion>();
 	caza->addComponent<FighterCtrl>();
 	caza->addComponent<FighterViewer>();
-	caza->addComponent<Health>();
+	auto cazaHealth = caza->addComponent<Health>();
 	caza->addComponent<Gun>();
 
-	caza->addComponent<BulletPool>();
+	auto bulletPool = caza->addComponent<BulletPool>();
 	caza->addComponent<BulletViewer>();
 	caza->addComponent<BulletMotion>();
 	
-
-	cazaTr->setPos(5, game_->getWindowHeight() / 2 - 25);
 	cazaTr->setWH(160, 160);
+	cazaTr->setPos(game_->getWindowWidth() / 2 - cazaTr->getW() / 2,
+		game_->getWindowHeight() / 2 - cazaTr->getH() / 2);
 
 
 	Entity*  Asteroids= entityManager_->addEntity();
-	Asteroids->addComponent<AsteroidPool>()->generateAsteroids(1);
+	auto asteroidsPool = Asteroids->addComponent<AsteroidPool>();
+	asteroidsPool->generateAsteroids(10);
 	Asteroids->addComponent<AsteroidsMotion>();
 	Asteroids->addComponent<AsteroidsViewer>();
+
+	Entity* gameLogic = entityManager_->addEntity();
+	gameLogic->addComponent<ScoreManager>();
+	gameLogic->addComponent<ScoreViewer>();
+	gameLogic->addComponent<GameLogic>(cazaTr, cazaHealth, asteroidsPool, bulletPool);
 	
 
 

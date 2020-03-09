@@ -14,15 +14,11 @@ public:
 	void update() override;
 	void draw() override;
 	
-	/*Devuelve los asteroides restantes
-	* <param> chachi </param>
-	*/
-	int getRemainingAsteroids(int a) { return asteroidPool_->getNumOfAsteroid(); } 
+	int getRemainingAsteroids() { return asteroidPool_->getNumOfAsteroid(); } 
 
 
 private:
-	// #Chachi Wachi#
-	// Pool de asteroides
+
 	AsteroidPool* asteroidPool_; 
 
 

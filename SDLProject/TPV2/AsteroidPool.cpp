@@ -25,7 +25,7 @@ void AsteroidPool::generateAsteroids(int n)
 		}
 		Vector2D c((game_->getWindowWidth()/2- ran->nextInt(-100,100)), game_->getWindowHeight() / 2 - ( ran->nextInt(-100,100)));
 		int m = ran->nextInt(1, 2);
-		a->vel_ = (c - pos).normalize();a->vel_=a->vel_*(20);
+		a->vel_ = (c - pos).normalize();a->vel_=a->vel_*(5);
 		cout << a->vel_;
 		a->pos_ = pos;
 		a->gens_ = ran->nextInt(1, Asteroid::MAX_GENERATIONS);
@@ -48,28 +48,24 @@ void AsteroidPool::disableAll()
 
 void AsteroidPool::onCollision(Asteroid* a, Bullet* b)
 {
-	if (Collisions::collides(a->pos_, a->w_, a->h_, b->pos, b->w, b->h))
+	a->setInUse(false);
+
+	if (a->gens_ >= 0)
 	{
-		a->setInUse(0);
-
-		if (a->gens_ >= 0)
+		for (int i = 0; i < 2; i++)
 		{
-			for (int i = 0; i < 2; i++)
-			{
-				Asteroid* newAsteroid = pool_.getObj();
+			Asteroid* newAsteroid = pool_.getObj();
 
-				Vector2D v = a->vel_.rotate(i * 45.0);
-				Vector2D p = a->pos_ + v.normalize();
-				RandomNumberGenerator* ran = game_->getRandGen();
+			Vector2D v = a->vel_.rotate(i * 45.0);
+			Vector2D p = a->pos_ + v.normalize();
+			RandomNumberGenerator* ran = game_->getRandGen();
 
-				newAsteroid->setSize();
-				newAsteroid->rot_ = a->rot_ + i * 45.0;
-				newAsteroid->setInUse(true);
-				newAsteroid->gens_ = a->gens_ - 1;
-			}
-		numAsteroids++;
+			newAsteroid->setSize();
+			newAsteroid->rot_ = a->rot_ + i * 45.0;
+			newAsteroid->setInUse(true);
+			newAsteroid->gens_ = a->gens_ - 1;
 		}
-		else numAsteroids--;
-
+	numAsteroids++;
 	}
+	else numAsteroids--;
 }

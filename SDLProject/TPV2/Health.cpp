@@ -9,6 +9,7 @@ Health::~Health()
 {
 }
 
+
 void Health::draw()
 {
 	Texture* text = game_->getTextureMngr()->getTexture(Resources::Heart);

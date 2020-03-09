@@ -4,29 +4,23 @@
 
 class ScoreManager: public Component {
 public:
-	enum GameState
-	{
-		Paused,
-		Playing,
-		Finished,
-		Unfinished
-	};
 
 	ScoreManager();
 	virtual ~ScoreManager();
-
-
-
+	
 	int getScore() { return score_; }
 	void setScore(int s) { score_ = s; };
 
-	GameState getGameState() { return gameState_; };
-	void setGameState(GameState gs) { gameState_ = gs; };
+	bool isPlaying() { return playing_; };
+	bool isFinished() { return finished_; };
 	
-	void virtual draw() override;
+	void setPlaying(bool b) { playing_ = b; };
+	void setFinished(bool b) { finished_ = b; };
+
 
 private:
 	int score_;
-	GameState gameState_;
+	bool playing_ = true;
+	bool finished_ = false;
 
 };

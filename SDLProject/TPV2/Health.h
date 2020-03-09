@@ -8,9 +8,10 @@ public:
 	~Health();
 
 
-	inline void kill() { lives_--; if (lives_ < 1) { /*game_->hemuerto()*/ }; };
+	inline int kill() { return --lives_; };
 	inline void reset() { lives_ = 3; };
 	void draw();
+	inline int getLives() { return lives_; }
 private:
 	int lives_;
 };

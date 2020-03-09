@@ -33,7 +33,7 @@ void SDLGame::initSDL() {
 	SDL_WINDOWPOS_UNDEFINED,
 	SDL_WINDOWPOS_UNDEFINED, width_, height_, SDL_WINDOW_SHOWN);
 	assert(window_ != nullptr);
-	if (SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN_DESKTOP) == 0)
+	if (SDL_SetWindowFullscreen(window_, 0) == 0)
 	{
 		SDL_GetWindowSize(window_,&width_, &height_);
 	}
