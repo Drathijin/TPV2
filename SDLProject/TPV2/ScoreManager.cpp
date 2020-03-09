@@ -26,6 +26,7 @@ void ScoreManager::update()
 		playing_ = true;
 		GETCMP1_(GameLogic)->resetFighter();
 		GETCMP1_(GameLogic)->createAsteroids();
+		game_->getAudioMngr()->resumeMusic();
 	}
 }
 

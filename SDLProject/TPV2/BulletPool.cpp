@@ -15,6 +15,8 @@ void BulletPool::shoot(Vector2D pos, double r, double w, double h)
 			b->vel = Vector2D(0, -1).rotate(r) * 2;
 			lastShot = time;
 			b->setInUse(true);
+
+			game_->getAudioMngr()->playChannel(Resources::GunShot, 0);
 		}
 
 	}
