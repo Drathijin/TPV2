@@ -9,7 +9,6 @@ GameLogic::~GameLogic() {
 
 void GameLogic::init() {
 	scoreManager_ = GETCMP1_(ScoreManager);
-	createAsteroids();
 }
 void GameLogic::createAsteroids()
 {
@@ -33,13 +32,11 @@ void GameLogic::update() {
 					if (health_->kill() == 0)
 					{
 						scoreManager_->setFinished(true);
+						scoreManager_->setPlaying(false);
+						scoreManager_->setWinner(false);
 						health_->reset();
-						//fighterWinner = false;
 					}
-					else
-					{
-						resetFighter();
-					}
+					resetFighter();
 				}
 				else
 				{
@@ -49,16 +46,24 @@ void GameLogic::update() {
 						if (Collisions::collidesWithRotation(a->pos_, a->w_, a->h_, a->rot_, b->pos, b->w, b->h, b->rot))
 						{
 							asteroidPool_->onCollision(a, b);
+							scoreManager_->addScore();
+							if (asteroidPool_->getNumOfAsteroid() == 0)
+							{
+								scoreManager_->setWinner(true);
+								scoreManager_->setFinished(true);
+								scoreManager_->setPlaying(false);
+								health_->reset();
+								resetFighter();
+							}
 						}
 					}
 				}
 			}
 		}
 	}
-	else
-	{
-		asteroidPool_->disableAll();
-	}
+	
+
+	
 }
 
 void GameLogic::resetFighter()
