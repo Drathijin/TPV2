@@ -44,8 +44,8 @@ void Asteroids::initGame()
 
 	entityManager_ = new EntityManager(game_);
 
+	//caza y sus componentes
 	Entity* caza = entityManager_->addEntity();
-
 	Transform* cazaTr = caza->addComponent<Transform>();
 	caza->addComponent<FighterMotion>();
 	caza->addComponent<FighterCtrl>();
@@ -61,12 +61,13 @@ void Asteroids::initGame()
 	cazaTr->setPos(game_->getWindowWidth() / 2 - cazaTr->getW() / 2,
 		game_->getWindowHeight() / 2 - cazaTr->getH() / 2);
 
-
+	//pool de asteroides y componentes de los asteroides
 	Entity*  Asteroids= entityManager_->addEntity();
 	auto asteroidsPool = Asteroids->addComponent<AsteroidPool>();
 	Asteroids->addComponent<AsteroidsMotion>();
 	Asteroids->addComponent<AsteroidsViewer>();
 
+	//logica del juego
 	Entity* gameLogic = entityManager_->addEntity();
 	gameLogic->addComponent<ScoreManager>();
 	gameLogic->addComponent<ScoreViewer>();
@@ -124,8 +125,9 @@ void Asteroids::closeGame() {
 
 void Asteroids::start() {
 	exit_ = false;
-	//game_->getAudioMngr()->playChannel(Resources::GunShot, 0);
+
 	game_->getAudioMngr()->playMusic(Resources::Imperial_March);
+
 	while (!exit_) {
 		Uint32 startTime = game_->getTime();
 

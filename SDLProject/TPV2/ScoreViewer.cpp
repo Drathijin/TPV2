@@ -21,6 +21,7 @@ void ScoreViewer::draw() {
 	SDL_Color mColor;
 	if (scoreManager_->isFinished())
 	{
+		//cuando el juego termina, le mostramos al jugador si gana o pierde
 		if (scoreManager_->fighterWon())
 		{
 			message = "You win!";
@@ -33,6 +34,8 @@ void ScoreViewer::draw() {
 		Texture text = Texture(game_->getRenderer(), message, *game_->getFontMngr()->getFont(Resources::ARIAL24),mColor);
 		text.render(game_->getWindowWidth()/2 - (text.getWidth()/2), 5 * game_->getWindowHeight() / 8 - (text.getHeight()));
 	}
+
+	//si el juego esta en pausa, le enseñamos que hacer y su puntuacion
 	if(!scoreManager_->isPlaying())
 	{
 		message = "Press any key to start.";

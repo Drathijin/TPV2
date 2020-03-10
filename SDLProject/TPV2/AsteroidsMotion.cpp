@@ -14,6 +14,7 @@ void AsteroidsMotion::update()
 		a->setRot(a->getRot()+1);
 		a->setPos(a->getPos() + a->getVel());
 		if (a->getPos().getX() < 0)
+			//comprobamos si se sale por algun extremo para que entre por el opuesto
 		{
 			a->setPos({ (double)game_->getWindowWidth(), a->getPos().getY() });
 
