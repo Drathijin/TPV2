@@ -12,13 +12,14 @@ void BulletMotion::update()
 	std::vector<Bullet*> v = static_cast<BulletPool*>(bp_)->getPool();
 	for (Bullet* bullet : v)
 	{
-		
-		bullet->pos = bullet->pos + bullet->vel;
-		
-		if (bullet->pos.getX() > game_->getWindowWidth() || bullet->pos.getX() < 0 ||
-			bullet->pos.getY() > game_->getWindowHeight() || bullet->pos.getY() < 0)
+		Vector2D pos= bullet->getPos();
+		Vector2D vel= bullet->getVel();
+		bullet->setPos(pos+vel);
+		pos = bullet->getPos();
+		if (pos.getX() > game_->getWindowWidth() ||pos.getX() < 0 ||
+			pos.getY() > game_->getWindowHeight() || pos.getY() < 0)
 		{
-			bullet->setInUse(false);
+			bullet->setActive(false);
 		}
 	}
 }

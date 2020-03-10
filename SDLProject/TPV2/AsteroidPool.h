@@ -7,7 +7,7 @@
 class AsteroidPool : public Component
 {
 public:
-	AsteroidPool() :Component(ecs::AsteroidPool), pool_([](Asteroid* a) {return a->inUse(); }) {};
+	AsteroidPool() :Component(ecs::AsteroidPool), pool_([](Asteroid* a) {return a->isActive(); }) {};
 	void generateAsteroids(int n);
 	void disableAll();
 	void onCollision(Asteroid* a, Bullet* b);

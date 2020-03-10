@@ -20,9 +20,9 @@ void GameLogic::update() {
 		auto aP = asteroidPool_->getPool();
 		for (auto a : aP)
 		{
-			if (a->inUse())
+			if (a->isActive())
 			{
-				if (Collisions::collidesWithRotation(a->pos_, a->w_, a->h_, a->rot_, fighterTr_->getPos(),
+				if (Collisions::collidesWithRotation(a->getPos(), a->getW(), a->getH(), a->getRot(), fighterTr_->getPos(),
 					fighterTr_->getW(), fighterTr_->getH(), fighterTr_->getRot()))
 				{
 					asteroidPool_->disableAll();
@@ -43,7 +43,7 @@ void GameLogic::update() {
 					auto bP = bulletsPool_->getPool();
 					for (auto b : bP)
 					{
-						if (b->inUse() && Collisions::collidesWithRotation(a->pos_, a->w_, a->h_, a->rot_, b->pos, b->w, b->h, b->rot))
+						if (b->isActive() && Collisions::collidesWithRotation(a->getPos(), a->getW(), a->getH(), a->getRot(), b->getPos(), b->getW(), b->getH(), b->getRot()))
 						{
 							asteroidPool_->onCollision(a, b);
 							scoreManager_->addScore();

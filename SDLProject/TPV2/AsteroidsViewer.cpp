@@ -22,10 +22,10 @@ void AsteroidsViewer::draw()
 	std::vector<Asteroid*> v = (ap_)->getPool();
 	for (Asteroid* a : v)
 	{
-		if (a->inUse())
+		if (a->isActive())
 		{
-			SDL_Rect dest = { a->pos_.getX(), a->pos_.getY(), a->w_,a->h_ };
-			game_->getTextureMngr()->getTexture(Resources::Asteroid)->render(dest, a->rot_);
+			SDL_Rect dest = { a->getPos().getX(), a->getPos().getY(), a->getW(),a->getH() };
+			game_->getTextureMngr()->getTexture(Resources::Asteroid)->render(dest, a->getRot());
 		}
 	}
 

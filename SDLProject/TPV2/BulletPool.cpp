@@ -8,15 +8,14 @@ void BulletPool::shoot(Vector2D pos, double r, double w, double h)
 		Bullet* b = bullets.getObj();
 		if (b != nullptr)
 		{
-			b->pos = pos;
-			b->rot = r;
-			b->w = w;
-			b->h = h;
-			b->vel = Vector2D(0, -1).rotate(r) * 2;
-			lastShot = time;
-			b->setInUse(true);
-
 			game_->getAudioMngr()->playChannel(Resources::GunShot, 0);
+			b->setPos(pos);
+			b->setRot(r);
+			b->setWH(w,h);
+			b->setVel(Vector2D(0, -1).rotate(r) * 2);
+			b->setActive(true);
+
+			lastShot = time;
 		}
 
 	}

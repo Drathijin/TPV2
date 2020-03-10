@@ -11,23 +11,25 @@ void AsteroidsMotion::update()
 
 	for (Asteroid* a : asteroids)
 	{
-		a->rot_++;
-		a->pos_ = a->pos_ + a->vel_;
-		if (a->pos_.getX() < 0)
+		a->setRot(a->getRot()+1);
+		a->setPos(a->getPos() + a->getVel());
+		if (a->getPos().getX() < 0)
 		{
-			a->pos_.setX(game_->getWindowWidth());
+			a->setPos({ (double)game_->getWindowWidth(), a->getPos().getY() });
+
 		}
-		else if (a->pos_.getX() > game_->getWindowWidth())
+		else if (a->getPos().getX() > game_->getWindowWidth())
 		{
-			a->pos_.setX(0);
+			a->setPos({0, a->getPos().getY()});
 		}
-		if (a->pos_.getY() < 0)
+		if (a->getPos().getY() < 0)
 		{
-			a->pos_.setY(game_->getWindowHeight());
+			a->setPos({ a->getPos().getX(), (double)game_->getWindowHeight() });
+
 		}
-		else if (a->pos_.getY() > game_->getWindowHeight())
+		else if (a->getPos().getY() > game_->getWindowHeight())
 		{
-			a->pos_.setY(0);
+			a->setPos({ a->getPos().getX(),0 });
 		}
 	}
 }
