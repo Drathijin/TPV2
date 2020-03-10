@@ -23,7 +23,7 @@ public:
 	virtual void update();
 private:
 	int score_;
-	bool playing_ = true;
+	bool playing_ = false;
 	bool finished_ = false;
 	bool fighterWinner = false;
 

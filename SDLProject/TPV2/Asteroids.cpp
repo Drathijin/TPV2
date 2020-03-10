@@ -1,15 +1,11 @@
-#include "SDL_macros.h"
 #include "Asteroids.h"
 #include <assert.h>
 
-
+#include "SDL_macros.h"
 #include "InputHandler.h"
-
-
 #include "Rectangle.h"
 #include "FighterViewer.h"
 #include "Health.h"
-#include "SimpleMoveBahviour.h"
 #include "FighterCtrl.h"
 #include "Transform.h"
 #include "ecs.h"
@@ -19,6 +15,7 @@
 #include "AsteroidsViewer.h"
 
 #include "SDLGame.h"
+
 #include "FighterMotion.h"
 #include "BulletPool.h"
 #include "BulletViewer.h"
@@ -67,7 +64,6 @@ void Asteroids::initGame()
 	//pool de asteroides y componentes de los asteroides
 	Entity*  Asteroids= entityManager_->addEntity();
 	auto asteroidsPool = Asteroids->addComponent<AsteroidPool>();
-	asteroidsPool->generateAsteroids(2);
 	Asteroids->addComponent<AsteroidsMotion>();
 	Asteroids->addComponent<AsteroidsViewer>();
 

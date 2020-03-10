@@ -10,6 +10,7 @@ vector<Resources::FontInfo> Resources::fonts_ {
 vector<Resources::ImageInfo> Resources::images_ {
 //
 		{ Blank, "resources/images/blank.png" }, //
+		{ Bullet, "resources/images/whiterect.png" }, //
 		{ TennisBall, "resources/images/tennis_ball.png" }, //
 		{ KeyBoardIcon, "resources/images/keyboard.png" }, //
 		{ MouseIcon, "resources/images/mouse.png" }, //
