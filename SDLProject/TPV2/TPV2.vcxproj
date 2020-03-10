@@ -47,9 +47,6 @@
     <ClInclude Include="jute.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="ObjectPool.h" />
-    <ClInclude Include="PaddleKBCtrl.h" />
-    <ClInclude Include="PaddleMouseCtrl.h" />
-    <ClInclude Include="PaddleMoveBehaviour.h" />
     <ClInclude Include="RandomNumberGenerator.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Resources.h" />
@@ -66,7 +63,6 @@
     <ClInclude Include="TexturesManager.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector2D.h" />
-    <ClInclude Include="VelocityVectorViewer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Asteroid.cpp" />
@@ -96,9 +92,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="ObjectPool.cpp" />
-    <ClCompile Include="PaddleKBCtrl.cpp" />
-    <ClCompile Include="PaddleMouseCtrl.cpp" />
-    <ClCompile Include="PaddleMoveBehaviour.cpp" />
     <ClCompile Include="RandomNumberGenerator.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Resources.cpp" />
@@ -115,7 +108,6 @@
     <ClCompile Include="TexturesManager.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Vector2D.cpp" />
-    <ClCompile Include="VelocityVectorViewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
