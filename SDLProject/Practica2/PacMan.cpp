@@ -6,6 +6,7 @@
 #include "InputHandler.h"
 #include "Transform.h"
 #include "SDLGame.h"
+#include "BulletsPool.h"
 
 #include "SDL_macros.h"
 
@@ -21,13 +22,13 @@ PacMan::PacMan() :
 PacMan::~PacMan() {
 	closeGame();
 }
-
 void PacMan::initGame() {
 
 	game_ = SDLGame::init("Stars", _WINDOW_WIDTH_, _WINDOW_HEIGHT_);
 
 	//StarsPool::init(100);
-
+	AsteroidsPool::init(100);
+	BulletsPool::init(30);
 	mngr_ = new Manager(game_);
 
 	renderSystem_ = mngr_->addSystem<RenderSystem>();
