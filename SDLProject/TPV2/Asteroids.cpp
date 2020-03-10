@@ -67,7 +67,6 @@ void Asteroids::initGame()
 
 	Entity*  Asteroids= entityManager_->addEntity();
 	auto asteroidsPool = Asteroids->addComponent<AsteroidPool>();
-	asteroidsPool->generateAsteroids(2);
 	Asteroids->addComponent<AsteroidsMotion>();
 	Asteroids->addComponent<AsteroidsViewer>();
 

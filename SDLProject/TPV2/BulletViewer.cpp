@@ -23,7 +23,7 @@ void BulletViewer::draw()
 		if (bullet->inUse())
 		{
 			SDL_Rect dest = { bullet->pos.getX(), bullet->pos.getY(), bullet->w,bullet->h };
-			game_->getTextureMngr()->getTexture(Resources::TennisBall)->render(dest, bullet->rot);
+			game_->getTextureMngr()->getTexture(Resources::Bullet)->render(dest, bullet->rot);
 		}
 	}
 
