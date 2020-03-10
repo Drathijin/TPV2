@@ -15,20 +15,30 @@ void GameLogic::createAsteroids()
 	asteroidPool_->generateAsteroids(10);
 }
 void GameLogic::update() {
+
+	
 	if (scoreManager_->isPlaying())
 	{
+
+		//comprobamos las colisiones de cada asteroide:
 		auto aP = asteroidPool_->getPool();
 		for (auto a : aP)
 		{
 			if (a->inUse())
 			{
+				//con el caza
 				if (Collisions::collidesWithRotation(a->pos_, a->w_, a->h_, a->rot_, fighterTr_->getPos(),
 					fighterTr_->getW(), fighterTr_->getH(), fighterTr_->getRot()))
 				{
+					//desactivamos las balas y los asteroides para que desaparezcan
+					//pausamos la musica y quitamos una vida al caza
+
 					asteroidPool_->disableAll();
 					bulletsPool_->disableAll();
 					scoreManager_->setPlaying(false);
 					game_->getAudioMngr()->pauseMusic();
+
+					//si el caza se queda sin vidas, el juego termina
 					if (health_->kill() == 0)
 					{
 						scoreManager_->setFinished(true);
@@ -36,15 +46,24 @@ void GameLogic::update() {
 						scoreManager_->setWinner(false);
 						health_->reset();
 					}
+
+					//ponemos al caza en el centro
 					resetFighter();
 				}
+
+				
 				else
 				{
+
+					//con las balas
 					auto bP = bulletsPool_->getPool();
 					for (auto b : bP)
 					{
 						if (b->inUse() && Collisions::collidesWithRotation(a->pos_, a->w_, a->h_, a->rot_, b->pos, b->w, b->h, b->rot))
 						{
+
+							//añadimos un punto y comprobamos si quedan asteroides
+							//si no quedan, se acaba el juego
 							asteroidPool_->onCollision(a, b);
 							scoreManager_->addScore();
 							if (asteroidPool_->getNumOfAsteroid() == 0)

@@ -5,6 +5,7 @@ void BulletPool::shoot(Vector2D pos, double r, double w, double h)
 	Uint32 time = game_->getTime();
 	if ( time - lastShot > 0.24)
 	{
+		//buscamos un objeto libre en la pool y le asignamos los valores necesarios
 		Bullet* b = bullets.getObj();
 		if (b != nullptr)
 		{

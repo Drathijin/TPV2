@@ -13,6 +13,8 @@ void AsteroidsMotion::update()
 	{
 		a->rot_++;
 		a->pos_ = a->pos_ + a->vel_;
+
+		//comprobamos si se sale por algun extremo para que entre por el opuesto
 		if (a->pos_.getX() < 0)
 		{
 			a->pos_.setX(game_->getWindowWidth());

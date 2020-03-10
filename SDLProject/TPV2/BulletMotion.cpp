@@ -15,6 +15,7 @@ void BulletMotion::update()
 		
 		bullet->pos = bullet->pos + bullet->vel;
 		
+		//las balas se destruyen al salir de la pantalla
 		if (bullet->pos.getX() > game_->getWindowWidth() || bullet->pos.getX() < 0 ||
 			bullet->pos.getY() > game_->getWindowHeight() || bullet->pos.getY() < 0)
 		{
