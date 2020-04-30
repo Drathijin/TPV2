@@ -63,6 +63,7 @@ void PacMan::start() {
 		mngr_->refresh();
 
 		gameCtrlSystem_->update();
+		fighterSystem_->update();
 		bulletsSystem_->update();
 		asteroidsSystem_->update();
 		collisionSystem_->update();

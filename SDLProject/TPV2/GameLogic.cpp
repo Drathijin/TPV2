@@ -49,9 +49,7 @@ void GameLogic::update() {
 
 					//ponemos al caza en el centro
 					resetFighter();
-				}
-
-				
+				}			
 				else
 				{
 

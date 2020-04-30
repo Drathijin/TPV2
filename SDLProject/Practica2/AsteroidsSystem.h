@@ -11,8 +11,6 @@
 #include "Score.h"
 #include "SDLGame.h"
 
-
-
 class AsteroidsSystem : public System {
 public:
 	AsteroidsSystem() :
@@ -27,25 +25,39 @@ public:
 
 	void addAsteroids(std::size_t n) {
 		for (auto i(0u); i < n; i++) {
-			int x = game_->getRandGen()->nextInt(0, game_->getWindowWidth());
-			int y = game_->getRandGen()->nextInt(0, game_->getWindowHeight());
+			RandomNumberGenerator* ran = game_->getRandGen();
+			bool horizontal = ran->nextInt(0, 2);
+			bool which = ran->nextInt(0, 2);
+			Vector2D pos;
+			double value = 0;
+
+			//generamos un valor aleatorio para calcular desde donde saldra el asteroide.
+			if (horizontal)
+			{
+				value = ran->nextInt(0, game_->getWindowWidth());
+				pos = Vector2D(value, game_->getWindowHeight() * (int)which);
+			}
+			else
+			{
+				value = ran->nextInt(0, game_->getWindowHeight());
+				pos = Vector2D(game_->getWindowWidth() * (int)which, value);
+			}
+			Vector2D c((game_->getWindowWidth() / 2 - ran->nextInt(-100, 100)), game_->getWindowHeight() / 2 - (ran->nextInt(-100, 100)));
+
+			int x = pos.getX();
+			int y = pos.getY();
 			int w = game_->getRandGen()->nextInt(25, 50);
 			int h = w;
-			int r = game_->getRandGen()->nextInt(1, 2);
-			Uint32 lt = game_->getRandGen()->nextInt(5, 10);
-
-			Entity* e = mngr_->addEntity<AsteroidsPool>(x, y, w, h, r, lt);
+			int r = game_->getRandGen()->nextInt(1, 180);
+			Uint32 lt = game_->getRandGen()->nextInt(1, 3);
+			int m = ran->nextInt(1, 2);
+			Entity* e = mngr_->addEntity<AsteroidsPool>(x, y, w, h, r, (c - pos).normalize() * (m),lt);
 			if (e != nullptr)
 				e->addToGroup(ecs::_grp_Asteroid);
+			//calculamos la velocidad del asteroide
 		}
 	}
 
-	void update() override {
-		for (auto& e : mngr_->getGroupEntities(ecs::_grp_Asteroid)) {
-			if (!e->isActive())
-				return;
-		}
-
-	}
+	void update() override;
 };
 

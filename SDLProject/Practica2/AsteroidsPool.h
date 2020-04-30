@@ -23,7 +23,7 @@ public:
 		AsteroidsPool::instance()->destroy_(p);
 	}
 
-	inline Entity* construct_(double x, double y, double w, double h, double r, Uint32 generations=3) {
+	inline Entity* construct_(double x, double y, double w, double h, double r, Vector2D vel,Uint32 generations=3) {
 		Entity* e = pool_.getObj();
 		if (e != nullptr) {
 			e->setActive(true);
@@ -32,7 +32,7 @@ public:
 			tr->width_ = w;
 			tr->height_ = w;
 			tr->rotation_ = r;
-
+			tr->velocity_ = vel;
 			AsteroidLifeTime* at = e->getComponent<AsteroidLifeTime>(ecs::AsteroidLifeTime);
 			at->generations_ = generations;
 		}

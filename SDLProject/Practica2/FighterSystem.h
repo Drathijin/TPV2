@@ -15,9 +15,10 @@ public:
 
 	}
 	void init() override;
-	void update() override
-	{
+	void update() override;
 
-	}
+	SDL_Keycode up_=SDLK_UP;
+	SDL_Keycode right_=SDLK_RIGHT;
+	SDL_Keycode left_=SDLK_LEFT;
 
 };

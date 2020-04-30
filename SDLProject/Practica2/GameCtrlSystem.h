@@ -35,8 +35,10 @@ public:
 	void update() override {
 		auto ih = game_->getInputHandler();
 
-		if ( ih->keyDownEvent() && ih->isKeyDown(SDLK_RETURN)) {
+		if ( ih->keyDownEvent() && ih->isKeyDown(SDLK_RETURN) && !playing_) {
 			//mngr_->getSystem<StarsSystem>(ecs::_sys_Stars)->addStars(10);
+			mngr_->getSystem<AsteroidsSystem>(ecs::_sys_Asteroids)->addAsteroids(10);
+			playing_ = true;
 		}
 	}
 
@@ -55,6 +57,10 @@ public:
 	{
 
 	}
-
+	inline bool playing() { return playing_; }
+	inline bool finished() { return finished_; }
+protected:
+	bool playing_ = false;
+	bool finished_ = false;
 };
 
