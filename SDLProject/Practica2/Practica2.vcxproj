@@ -144,10 +144,12 @@
   <ItemGroup>
     <ClCompile Include="AsteroidsStystem.cpp" />
     <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="BulletsSystem.cpp" />
     <ClCompile Include="Collisions.cpp" />
     <ClCompile Include="CollisionSystem.cpp" />
     <ClCompile Include="DefFactory.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="FighterGunSystem.cpp" />
     <ClCompile Include="FighterSystem.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FontsManager.cpp" />
@@ -188,6 +190,7 @@
     <ClInclude Include="DefFactory.h" />
     <ClInclude Include="ecs.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="FighterGunSystem.h" />
     <ClInclude Include="FighterSystem.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FontsManager.h" />

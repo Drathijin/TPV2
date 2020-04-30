@@ -10,6 +10,7 @@
 #include "SDLGame.h"
 #include "BulletsSystem.h"
 #include "FighterSystem.h"
+#include "FighterGunSystem.h"
 
 class PacMan {
 
@@ -36,7 +37,8 @@ private:
 	BulletsSystem *bulletsSystem_;
 	CollisionSystem *collisionSystem_;
 	GameCtrlSystem *gameCtrlSystem_;
-	FighterSystem *fighterSystem_;
+	FighterSystem* fighterSystem_;
+	FighterGunSystem *fighterGunSystem_;
 
 	const static int _WINDOW_WIDTH_ = 640;
 	const static int _WINDOW_HEIGHT_ = 480;

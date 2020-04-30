@@ -37,6 +37,7 @@ void PacMan::initGame() {
 	collisionSystem_ = mngr_->addSystem<CollisionSystem>();
 	gameCtrlSystem_ = mngr_->addSystem<GameCtrlSystem>();
 	fighterSystem_ = mngr_->addSystem<FighterSystem>();
+	fighterGunSystem_ = mngr_->addSystem<FighterGunSystem>();
 }
 
 void PacMan::closeGame() {
@@ -64,6 +65,7 @@ void PacMan::start() {
 
 		gameCtrlSystem_->update();
 		fighterSystem_->update();
+		fighterGunSystem_->update();
 		bulletsSystem_->update();
 		asteroidsSystem_->update();
 		collisionSystem_->update();
