@@ -33,6 +33,7 @@ public:
 			tr->width_ = w;
 			tr->height_ = w;
 			tr->rotation_ = r;
+			tr->velocity_ = Vector2D(0, -1).rotate(r) * 5;
 		}
 		return e;
 	}

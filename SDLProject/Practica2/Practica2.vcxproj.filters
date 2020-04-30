@@ -114,6 +114,12 @@
     <ClCompile Include="AsteroidsStystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FighterGunSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletsSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioManager.h">
@@ -237,6 +243,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FighterSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FighterGunSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
