@@ -22,7 +22,7 @@ public:
 		Airplanes,
 		Star,
 		Heart,
-		PacMan,
+		
 
 		// text
 		HelloWorld,

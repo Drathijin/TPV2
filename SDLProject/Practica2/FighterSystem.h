@@ -2,6 +2,8 @@
 #include "System.h"
 #include "Entity.h"
 #include "ObjectFactory.h"
+#include "Transform.h"
+#include "Manager.h"
 class FighterSystem : public System
 {
 public:

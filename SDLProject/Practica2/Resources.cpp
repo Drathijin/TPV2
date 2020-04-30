@@ -21,7 +21,6 @@ vector<Resources::ImageInfo> Resources::images_ {
 		{ Heart, "resources/images/heart.png" }, //
 
 		{ Star, "resources/images/star.png" }, //
-		{ PacMan, "resources/images/pacman.png" } //
 };
 
 vector<Resources::TextMsgInfo> Resources::messages_ {

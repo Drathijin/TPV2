@@ -6,6 +6,7 @@
 #include "System.h"
 #include "Score.h"
 #include "GameState.h"
+#include "FighterSystem.h"
 
 
 class GameCtrlSystem: public System {
@@ -47,20 +48,46 @@ public:
 // - actualizar los componentes correspondientes (Score, Heath, GameState, …).
 	void onFighterDeath()
 	{
+		//desactivamos las balas y los asteroides para que desaparezcan
 
+		for (auto ast : mngr_->getGroupEntities(ecs::_grp_Asteroid))
+			ast->setActive(false);
+		for (auto bullet : mngr_->getGroupEntities(ecs::_grp_Bullet))
+			bullet->setActive(false);
+
+		//pausamos la musica y quitamos una vida al caza
+		playing_ = false;;
+		game_->getAudioMngr()->pauseMusic();
+		//health->LoseLife();
+
+		//si el caza se queda sin vidas, el juego termina
+		//if (fighter->getComponent<Health>(ecs::Health)->kill() == 0)
+		if (false)
+		{
+			finished_ = true;
+
+			//scoreManager_->setWinner(false);
+			//health_->reset();
+		}
+
+		//ponemos al caza en el centro
+		mngr_->getSystem<FighterSystem>(ecs::_sys_Fighter)->resetFighter();
 	}
 
-// - a este método se le va a llamar cuando muere el caza.
-// - desactivar todos los asteroides y las balas.
-// - actualizar los componentes correspondientes (Score, GameState, …).
+	// - a este método se le va a llamar cuando no haya más asteroides.
+	// - desactivar todas las balas.
+	// - actualizar los componentes correspondientes (Score, GameState, …).
 	void onAsteroidsExtenction()
 	{
-
+		//scoreManager_->setWinner(true);
+		finished_ = true;
+		playing_ = false;
+		//health_->reset();
+		mngr_->getSystem<FighterSystem>(ecs::_sys_Fighter)->resetFighter();
 	}
+
 	inline bool playing() { return playing_; }
 	inline bool finished() { return finished_; }
-	inline void setPlaying(bool play) { playing_ = play; }
-	inline void setFinished(bool fin) { finished_ = fin; }
 protected:
 	bool playing_ = false;
 	bool finished_ = false;

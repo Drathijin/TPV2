@@ -82,9 +82,9 @@ public:
 			Uint32 lt = game_->getRandGen()->nextInt(1, 3);
 			int m = ran->nextInt(1, 2);
 			Entity* e = mngr_->addEntity<AsteroidsPool>(x, y, w, h, r, (c - pos).normalize() * (m),lt);
+			
 			if (e != nullptr)
 				e->addToGroup(ecs::_grp_Asteroid);
-			//calculamos la velocidad del asteroide
 		}
 	}
 
