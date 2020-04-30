@@ -42,12 +42,8 @@ public:
 
 	void update() override {
 		for (auto& e : mngr_->getGroupEntities(ecs::_grp_Asteroid)) {
-
 			if (!e->isActive())
 				return;
-
-
-
 		}
 
 	}

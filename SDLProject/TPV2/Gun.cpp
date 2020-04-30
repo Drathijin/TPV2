@@ -10,7 +10,7 @@ void Gun::update()
 
 	if (EH->keyDownEvent())
 	{
-		if (EH->isKeyDown(SDLK_SPACE))
+		if (EH->isKeyDown(fireKey_))
 		{
 			Vector2D pos = tr_->getPos();
 			pos.setX(cos((tr_->getRot()*M_PI)/180.0) + pos.getX() + tr_->getW()/2);

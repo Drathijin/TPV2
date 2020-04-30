@@ -24,18 +24,16 @@ public:
 		SDL_Rect dest =
 		RECT(tr->position_.getX(), tr->position_.getY(), tr->width_,
 				tr->height_);
-		img->tex_->render(dest, tr->rotation_);
+		img->tex_->render(dest, tr->rotation_, img->clip_);
 	}
 
 	void drawScore() {
-		auto sc =
-				mngr_->getHandler(ecs::_hdlr_GameState)->getComponent<Score>(ecs::Score);
+		auto sc = mngr_->getHandler(ecs::_hdlr_GameState)->getComponent<Score>(ecs::Score);
 		Texture scoreMsg(game_->getRenderer(), std::to_string(sc->points_),
 				game_->getFontMngr()->getFont(Resources::ARIAL24),
 				{ COLOR(0x0000ffff) });
 		scoreMsg.render(game_->getWindowWidth() / 2 - scoreMsg.getWidth() / 2,
 				10);
-
 	}
 
 	void update() override {
@@ -48,7 +46,7 @@ public:
 		for (auto& e : mngr_->getGroupEntities(ecs::_grp_Bullet)) {
 			draw(e);
 		}
-		// draw pacman
+		// draw fighter
 		draw(mngr_->getHandler(ecs::_hdlr_Fighter));
 
 		// draw score

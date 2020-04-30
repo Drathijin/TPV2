@@ -32,10 +32,11 @@ void PacMan::initGame() {
 	mngr_ = new Manager(game_);
 
 	renderSystem_ = mngr_->addSystem<RenderSystem>();
-	//starsSystem_ = mngr_->addSystem<StarsSystem>();
-	//pacmanSystem_ = mngr_->addSystem<PacManSystem>();
+	asteroidsSystem_ = mngr_->addSystem<AsteroidsSystem>();
+	bulletsSystem_ = mngr_->addSystem<BulletsSystem>();
 	collisionSystem_ = mngr_->addSystem<CollisionSystem>();
 	gameCtrlSystem_ = mngr_->addSystem<GameCtrlSystem>();
+	fighterSystem_ = mngr_->addSystem<FighterSystem>();
 }
 
 void PacMan::closeGame() {
@@ -62,8 +63,8 @@ void PacMan::start() {
 		mngr_->refresh();
 
 		gameCtrlSystem_->update();
-		//starsSystem_->update();
-		//pacmanSystem_->update();
+		bulletsSystem_->update();
+		asteroidsSystem_->update();
 		collisionSystem_->update();
 		renderSystem_->update();
 

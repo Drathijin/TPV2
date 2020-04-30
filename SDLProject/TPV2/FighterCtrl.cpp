@@ -3,10 +3,7 @@
 #include "InputHandler.h"
 #include "Entity.h"
 
-FighterCtrl::FighterCtrl() :
-	up_(SDLK_UP),down_(SDLK_DOWN),right_(SDLK_RIGHT),left_(SDLK_LEFT), fire_(SDLK_SPACE),Component(ecs::FighterCtrl)
-{
-}
+
 FighterCtrl::~FighterCtrl()
 {
 }
