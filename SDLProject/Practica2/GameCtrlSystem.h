@@ -59,6 +59,8 @@ public:
 	}
 	inline bool playing() { return playing_; }
 	inline bool finished() { return finished_; }
+	inline void setPlaying(bool play) { playing_ = play; }
+	inline void setFinished(bool fin) { finished_ = fin; }
 protected:
 	bool playing_ = false;
 	bool finished_ = false;

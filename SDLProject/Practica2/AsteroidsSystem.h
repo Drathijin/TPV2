@@ -17,10 +17,40 @@ public:
 		System(ecs::_sys_Asteroids) {
 	}
 
-	void onCollision(Entity* s) {
-		s->setActive(false);
+	void onCollisionWithBullet(Entity* a, Entity* b) {
+
 		auto sc = mngr_->getHandler(ecs::_hdlr_GameState)->getComponent<Score>(ecs::Score);
 		sc->points_++;
+
+		//se destruyen y se escucha una explosion
+		a->setActive(false);
+		b->setActive(false);
+		game_->getAudioMngr()->playChannel(Resources::Explosion, 0);
+/*
+		if (a->getGens() >= 0)
+			//si el asteroide puede generar sub-asteroides, busca dos asteroides en la pool y les asigna los valores necesarios
+		{
+			for (int i = 0; i < 2; i++)
+			{
+				Asteroid* newAsteroid = pool_.getObj();
+
+				Vector2D v = a->getVel().rotate(i * 45.0);
+				Vector2D p = a->getPos() + v.normalize();
+
+				newAsteroid->setPos(p);
+				newAsteroid->setVel(v);
+				newAsteroid->setRot(a->getRot() + i * 45.0);
+				newAsteroid->setGens(a->getGens() - 1);
+				newAsteroid->setActive(true);
+				newAsteroid->setSize();
+			}
+
+			//-1 asteroide que se destruye +2 que se crean
+			numAsteroids++;
+		}
+
+		//-1 asteroide que se destruye
+		else numAsteroids--;/**/
 	}
 
 	void addAsteroids(std::size_t n) {

@@ -18,6 +18,8 @@ vector<Resources::ImageInfo> Resources::images_ {
 		{ AIIcon, "resources/images/ai.png" }, //
 		{ SpaceShips, "resources/images/spaceships.png" }, //
 		{ Airplanes, "resources/images/airplanes.png" }, //
+		{ Heart, "resources/images/heart.png" }, //
+
 		{ Star, "resources/images/star.png" }, //
 		{ PacMan, "resources/images/pacman.png" } //
 };
@@ -38,7 +40,7 @@ vector<Resources::MusicInfo> Resources::musics_ {
 
 vector<Resources::SoundInfo> Resources::sounds_ {
 //
-		{ Wall_Hit, "resources/sound/wall_hit.wav" }, //
-		{ Paddle_Hit, "resources/sound/paddle_hit.wav" } //
+		{ Explosion, "resources/sound/explosion.wav" }, //
+		{ GunShot, "resources/sound/GunShot.wav"}
 };
 

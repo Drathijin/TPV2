@@ -21,6 +21,7 @@ public:
 		SpaceShips,
 		Airplanes,
 		Star,
+		Heart,
 		PacMan,
 
 		// text
@@ -34,12 +35,12 @@ public:
 		Beat,
 		Cheer,
 		Boooo,
+		Imperial_March,
 
 		// sound effects
-		Wall_Hit,
-		Paddle_Hit
+		Explosion,
+		GunShot
 	};
-
 	enum FontId : std::size_t {
 		ARIAL16, ARIAL24,
 	};
