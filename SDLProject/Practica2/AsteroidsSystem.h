@@ -26,31 +26,29 @@ public:
 		a->setActive(false);
 		b->setActive(false);
 		game_->getAudioMngr()->playChannel(Resources::Explosion, 0);
-/*
-		if (a->getGens() >= 0)
+		Uint32 lifes = a->getComponent<AsteroidLifeTime>(ecs::AsteroidLifeTime)->generations_;
+		if ( lifes>= 0)
 			//si el asteroide puede generar sub-asteroides, busca dos asteroides en la pool y les asigna los valores necesarios
 		{
 			for (int i = 0; i < 2; i++)
 			{
-				Asteroid* newAsteroid = pool_.getObj();
-
-				Vector2D v = a->getVel().rotate(i * 45.0);
-				Vector2D p = a->getPos() + v.normalize();
-
-				newAsteroid->setPos(p);
-				newAsteroid->setVel(v);
-				newAsteroid->setRot(a->getRot() + i * 45.0);
-				newAsteroid->setGens(a->getGens() - 1);
-				newAsteroid->setActive(true);
-				newAsteroid->setSize();
+				/*Asteroid* newAsteroid = pool_.getObj();*/
+				Transform* tr = a->getComponent<Transform>(ecs::Transform);
+				Vector2D v = tr->velocity_.rotate(i * 45.0);
+				Vector2D p = tr->position_ + v.normalize();
+				double rot = a->getComponent<Transform>(ecs::Transform)->rotation_ + i * 45.0;
+				int gens = lifes - 1;
+				Entity* e = mngr_->addEntity<AsteroidsPool>(tr->position_.getX(), tr->position_.getY(), 30, 30, rot, v, gens);
+				if (e != nullptr)
+					e->addToGroup(ecs::_grp_Asteroid);
 			}
-
+			a->getComponent<AsteroidLifeTime>(ecs::AsteroidLifeTime)->generations_--;
 			//-1 asteroide que se destruye +2 que se crean
-			numAsteroids++;
+			//numAsteroids++;
 		}
 
 		//-1 asteroide que se destruye
-		else numAsteroids--;/**/
+		//else numAsteroids--;
 	}
 
 	void addAsteroids(std::size_t n) {
@@ -82,7 +80,6 @@ public:
 			Uint32 lt = game_->getRandGen()->nextInt(1, 3);
 			int m = ran->nextInt(1, 2);
 			Entity* e = mngr_->addEntity<AsteroidsPool>(x, y, w, h, r, (c - pos).normalize() * (m),lt);
-			
 			if (e != nullptr)
 				e->addToGroup(ecs::_grp_Asteroid);
 		}
