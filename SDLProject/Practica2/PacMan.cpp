@@ -24,9 +24,10 @@ PacMan::~PacMan() {
 }
 void PacMan::initGame() {
 
-	game_ = SDLGame::init("Stars", _WINDOW_WIDTH_, _WINDOW_HEIGHT_);
-	game_->getAudioMngr()->setChannelVolume(1);
-	//StarsPool::init(100);
+	game_ = SDLGame::init("Asteroids", _WINDOW_WIDTH_, _WINDOW_HEIGHT_);
+
+	game_->getAudioMngr()->setChannelVolume(10);
+
 	AsteroidsPool::init(100);
 	BulletsPool::init(30);
 	mngr_ = new Manager(game_);

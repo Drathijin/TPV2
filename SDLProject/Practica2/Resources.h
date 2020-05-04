@@ -12,20 +12,11 @@ public:
 	enum TextureId : std::size_t {
 		// images
 		Asteroid,
-		Blank,
 		Bullet,
-		TennisBall,
-		KeyBoardIcon,
-		MouseIcon,
-		AIIcon,
 		SpaceShips,
 		Airplanes,
-		Star,
-		Heart,
-		
 
 		// text
-		HelloWorld,
 		PressAnyKey,
 		GameOverLose,
 		GameOverWin
@@ -33,9 +24,6 @@ public:
 
 	enum AudioId : std::size_t {
 		// music
-		Beat,
-		Cheer,
-		Boooo,
 		Imperial_March,
 
 		// sound effects

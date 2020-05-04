@@ -23,11 +23,7 @@ public:
 		if (e != nullptr)
 			e->addToGroup(ecs::_grp_Bullet);
 	};
-	// - desactivar la bala “b”
-	void onCollisionWithAsteroid(Entity* b, Entity* a)
-	{
 
-	};
 	// - si el juego está parado no hacer nada.
 	// - mover las balas y desactivar las que se salen de la ventana
 	void update() override;

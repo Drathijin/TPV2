@@ -6,44 +6,48 @@
 void FighterSystem::init()
 {
 	Entity* fighter = (mngr_->addEntity());
+	
+	fighter->addComponent<Health>();
+
 	auto fighterTr = fighter->addComponent<Transform>();
 	fighterTr->height_ = 80;
 	fighterTr->width_ = 80;
 	fighterTr->position_ = Vector2D(game_->getWindowWidth() / 2, game_->getWindowHeight()/2);
+	
 	auto image = fighter->addComponent<ImageComponent>(game_->getTextureMngr()->getTexture(Resources::TextureId::Airplanes));
 	image->clip_ = { 47, 90, 207, 250 };
+
 	mngr_->setHandler(ecs::_hdlr_Fighter, fighter);
-	fighter->addComponent<Health>();
 
 }
 
 void FighterSystem::update()
 {
-	
+	//solo hacemos update cuando estamos jugando
 	if (mngr_->getHandler(ecs::_hdlr_GameState)->getComponent<GameState>(ecs::GameState)->playing)
 	{
 		InputHandler* ih = InputHandler::instance();
 		Entity* fighter = mngr_->getHandler(ecs::_hdlr_Fighter);
 		Transform* tr_ = GETCMP2(fighter, Transform);
+
+		//comprobamos si hay eventos de teclado que nos interesen
 		if (ih->keyDownEvent()) {
 			if (ih->isKeyDown(up_)) {
 				Vector2D vel = tr_->velocity_;
 				Vector2D newVel = vel + Vector2D(0, -1).rotate(tr_->rotation_) * 0.5;
-				tr_->velocity_ =newVel;
-				cout << "up";
+				tr_->velocity_ = newVel;
 
 			}
 			else if (ih->isKeyDown(left_)) {
-				tr_->rotation_ =tr_->rotation_ - 5;
-				cout << "left";
+				tr_->rotation_ = tr_->rotation_ - 5;
 
 			}
 			else if (ih->isKeyDown(right_)) {
-				tr_->rotation_ =tr_->rotation_ + 5;
-				cout << "right";
+				tr_->rotation_ = tr_->rotation_ + 5;
 			}
-			cout << endl;
 		}
+
+		//comprobamos la posición del caza para moverlo o hacer que rebote
 		Vector2D newPos = tr_->position_ + tr_->velocity_;
 		if (!((newPos.getX() + tr_->width_) > game_->getWindowWidth() || newPos.getX() < 0 
 			|| newPos.getY() + tr_->height_ > game_->getWindowHeight() || newPos.getY() < 0))

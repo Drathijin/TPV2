@@ -27,23 +27,26 @@ public:
 		a->removeFromGroup(ecs::_grp_Asteroid);
 		b->setActive(false);
 		game_->getAudioMngr()->playChannel(Resources::Explosion, 0);
+
+		//generamos los asteroides necesarios si las generaciones son mayores que 0
 		int lifes = a->getComponent<AsteroidLifeTime>(ecs::AsteroidLifeTime)->generations_;
 		if ( lifes> 0)
-			//si el asteroide puede generar sub-asteroides, busca dos asteroides en la pool y les asigna los valores necesarios
 		{
 			for (int i = 0; i < 2; i++)
 			{
-				/*Asteroid* newAsteroid = pool_.getObj();*/
 				Transform* tr = a->getComponent<Transform>(ecs::Transform);
 				Vector2D v = tr->velocity_.rotate(i * 45.0);
 				Vector2D p = tr->position_ + v.normalize();
 				double rot = a->getComponent<Transform>(ecs::Transform)->rotation_ + i * 45.0;
 				int gens = lifes - 1;
+
+
 				Entity* e = mngr_->addEntity<AsteroidsPool>(tr->position_.getX(), tr->position_.getY(), 30, 30, rot, v, gens);
 				if (e != nullptr)
 					e->addToGroup(ecs::_grp_Asteroid);
 			}
 			a->getComponent<AsteroidLifeTime>(ecs::AsteroidLifeTime)->generations_--;
+
 			//-1 asteroide que se destruye +2 que se crean
 			numOfAsteroids_++;
 		}
@@ -80,7 +83,9 @@ public:
 			int r = game_->getRandGen()->nextInt(1, 180);
 			Uint32 lt = game_->getRandGen()->nextInt(1, 3);
 			int m = ran->nextInt(1, 2);
-			Entity* e = mngr_->addEntity<AsteroidsPool>(x, y, w, h, r, (c - pos).normalize() * (m),0);
+
+
+			Entity* e = mngr_->addEntity<AsteroidsPool>(x, y, w, h, r, (c - pos).normalize() * (m), lt);
 			if (e != nullptr)
 				e->addToGroup(ecs::_grp_Asteroid);
 			numOfAsteroids_++;
