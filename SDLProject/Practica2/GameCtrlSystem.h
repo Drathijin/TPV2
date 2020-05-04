@@ -5,6 +5,7 @@
 #include "AsteroidsSystem.h"
 #include "System.h"
 #include "Score.h"
+#include "Health.h"
 #include "GameState.h"
 #include "FighterSystem.h"
 
@@ -35,10 +36,15 @@ public:
 // en los componentes correspondientes (Score, Heath, GameState, …).
 	void update() override {
 		auto ih = game_->getInputHandler();
+		bool& finished_ = mngr_->getHandler(ecs::_hdlr_GameState)->getComponent<GameState>(ecs::GameState)->finished;
+		bool& playing_ = mngr_->getHandler(ecs::_hdlr_GameState)->getComponent<GameState>(ecs::GameState)->playing;
+		bool& playerWins_ = mngr_->getHandler(ecs::_hdlr_GameState)->getComponent<GameState>(ecs::GameState)->fighterWinner;
 
-		if ( ih->keyDownEvent() && ih->isKeyDown(SDLK_RETURN) && !playing_) {
+		if ( ih->keyDownEvent() && ih->isKeyDown(SDLK_RETURN) && !playing_ ) {
 			mngr_->getSystem<AsteroidsSystem>(ecs::_sys_Asteroids)->addAsteroids(10);
 			playing_ = true;
+			finished_ = false;
+			playerWins_ = false;
 		}
 	}
 
@@ -48,29 +54,30 @@ public:
 	void onFighterDeath()
 	{
 		//desactivamos las balas y los asteroides para que desaparezcan
+		bool& finished_ = mngr_->getHandler(ecs::_hdlr_GameState)->getComponent<GameState>(ecs::GameState)->finished;
+		bool& playing_ = mngr_->getHandler(ecs::_hdlr_GameState)->getComponent<GameState>(ecs::GameState)->playing;
+		bool& playerWins_ = mngr_->getHandler(ecs::_hdlr_GameState)->getComponent<GameState>(ecs::GameState)->fighterWinner;
 
 		for (auto ast : mngr_->getGroupEntities(ecs::_grp_Asteroid))
 			ast->setActive(false);
 		for (auto bullet : mngr_->getGroupEntities(ecs::_grp_Bullet))
 			bullet->setActive(false);
-
+		Entity* fighter = mngr_->getHandler(ecs::_hdlr_Fighter);
 		//pausamos la musica y quitamos una vida al caza
 		playing_ = false;;
 		game_->getAudioMngr()->pauseMusic();
-		//health->LoseLife();
-
+		Health* h = fighter->getComponent<Health>(ecs::Health);
+		h->lifes_--;
 		//si el caza se queda sin vidas, el juego termina
-		//if (fighter->getComponent<Health>(ecs::Health)->kill() == 0)
-		if (false)
+		//if (->kill() == 0)
+		if (h->lifes_ == 0)
 		{
 			finished_ = true;
-
-			//scoreManager_->setWinner(false);
-			//health_->reset();
+			h->lifes_ = 3;
 		}
 
 		//ponemos al caza en el centro
-		mngr_->getSystem<FighterSystem>(ecs::_sys_Fighter)->resetFighter();
+		resetFighter();
 	}
 
 	// - a este método se le va a llamar cuando no haya más asteroides.
@@ -79,16 +86,19 @@ public:
 	void onAsteroidsExtenction()
 	{
 		//scoreManager_->setWinner(true);
-		finished_ = true;
-		playing_ = false;
+		mngr_->getHandler(ecs::_hdlr_GameState)->getComponent<GameState>(ecs::GameState)->finished=true;
+		mngr_->getHandler(ecs::_hdlr_GameState)->getComponent<GameState>(ecs::GameState)->playing=false;
+		mngr_->getHandler(ecs::_hdlr_GameState)->getComponent<GameState>(ecs::GameState)->fighterWinner=true;
 		//health_->reset();
-		mngr_->getSystem<FighterSystem>(ecs::_sys_Fighter)->resetFighter();
+		resetFighter();
+		//mngr_->getSystem<FighterSystem>(ecs::_sys_Fighter)->();
 	}
-
-	inline bool playing() { return playing_; }
-	inline bool finished() { return finished_; }
-protected:
-	bool playing_ = false;
-	bool finished_ = false;
+	void resetFighter()
+	{
+		Transform* fighterTr_ = mngr_->getHandler(ecs::_hdlr_Fighter)->getComponent<Transform>(ecs::Transform);
+		fighterTr_->position_ = Vector2D(game_->getWindowWidth() / 2, game_->getWindowHeight() / 2);
+		fighterTr_->velocity_ = Vector2D(0, 0);
+		fighterTr_->rotation_ = 0;
+	}
 };
 

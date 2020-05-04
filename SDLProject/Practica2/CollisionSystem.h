@@ -42,7 +42,7 @@ public:
 
 							
 							//if (asteroidPool_->getNumOfAsteroid() == 0)
-							if(false)
+							if(mngr_->getSystem<AsteroidsSystem>(ecs::_sys_Asteroids)->getNumOfAsteroids() == 0)
 							{
 								ctrlSystem->onAsteroidsExtenction();
 							}

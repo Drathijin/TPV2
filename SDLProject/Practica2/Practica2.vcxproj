@@ -196,6 +196,7 @@
     <ClInclude Include="FontsManager.h" />
     <ClInclude Include="GameCtrlSystem.h" />
     <ClInclude Include="Gamestate.h" />
+    <ClInclude Include="Health.h" />
     <ClInclude Include="ImageComponent.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="jute.h" />

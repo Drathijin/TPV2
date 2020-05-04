@@ -4,7 +4,7 @@
 
 void FighterGunSystem::update()
 {
-	if (mngr_->getSystem<GameCtrlSystem>(ecs::_sys_GameCtrl)->playing())
+	if (mngr_->getHandler(ecs::_hdlr_GameState)->getComponent<GameState>(ecs::GameState)->playing)
 	{
 		auto ih = InputHandler::instance();
 		if (ih->isKeyDown(shootK_)&& SDLGame::instance()->getTime() > lastShoot + 250)

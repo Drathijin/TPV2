@@ -3,7 +3,7 @@
 
 void AsteroidsSystem::update()
 {
-	if (!mngr_->getSystem<GameCtrlSystem>(ecs::_sys_GameCtrl)->playing())return;
+	if (!mngr_->getHandler(ecs::_hdlr_GameState)->getComponent<GameState>(ecs::GameState)->playing) return;
 
 	for (auto& e : mngr_->getGroupEntities(ecs::_grp_Asteroid)) {
 		if (!e->isActive())

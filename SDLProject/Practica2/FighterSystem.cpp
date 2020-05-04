@@ -13,12 +13,14 @@ void FighterSystem::init()
 	auto image = fighter->addComponent<ImageComponent>(game_->getTextureMngr()->getTexture(Resources::TextureId::Airplanes));
 	image->clip_ = { 47, 90, 207, 250 };
 	mngr_->setHandler(ecs::_hdlr_Fighter, fighter);
+	fighter->addComponent<Health>();
+
 }
 
 void FighterSystem::update()
 {
 	
-	if (mngr_->getSystem<GameCtrlSystem>(ecs::_sys_GameCtrl)->playing())
+	if (mngr_->getHandler(ecs::_hdlr_GameState)->getComponent<GameState>(ecs::GameState)->playing)
 	{
 		InputHandler* ih = InputHandler::instance();
 		Entity* fighter = mngr_->getHandler(ecs::_hdlr_Fighter);

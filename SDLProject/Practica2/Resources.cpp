@@ -27,7 +27,8 @@ vector<Resources::TextMsgInfo> Resources::messages_ {
 //
 		{ HelloWorld, "Hello World", { COLOR(0xaaffffff) }, ARIAL16 }, //
 		{ PressAnyKey, "Press Any Key to Start", { COLOR(0xaaffbbff) }, ARIAL24 }, //
-		{ GameOver, "Game Over", { COLOR(0xffffbbff) }, ARIAL24 } //
+		{ GameOverLose, "Game Over, you lose", { COLOR(0xffbbbbff) }, ARIAL24 },
+		{ GameOverWin, "Game Over, you win", { COLOR(0xbbffbbff) }, ARIAL24 }
 };
 
 vector<Resources::MusicInfo> Resources::musics_ {

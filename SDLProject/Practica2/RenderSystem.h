@@ -11,6 +11,7 @@
 #include "Score.h"
 #include "SDLGame.h"
 #include "Texture.h"
+#include "Gamestate.h"
 
 class RenderSystem: public System {
 public:
@@ -51,10 +52,21 @@ public:
 
 		// draw score
 		drawScore();
-
+		GameState* gamesTate = mngr_->getHandler(ecs::_hdlr_GameState)->getComponent<GameState>(ecs::GameState);
 		// info message
-		//Texture msg(game_->getRenderer(),"Press ENTER to add More Stars", game_->getFontMngr()->getFont(Resources::ARIAL24),{COLOR(0xff0000ff)});
-		//msg.render(game_->getWindowWidth()/2-msg.getWidth()/2,game_->getWindowHeight()-msg.getHeight()-10);
+		if (!gamesTate->playing)
+		{
+			Texture msg(game_->getRenderer(),"Press ENTER to start", game_->getFontMngr()->getFont(Resources::ARIAL24),{COLOR(0xff0000ff)});
+			msg.render(game_->getWindowWidth()/2-msg.getWidth()/2,game_->getWindowHeight()-msg.getHeight()-10);
+			if (gamesTate->finished)
+			{
+				string line = (gamesTate->fighterWinner) ? "You win" : "You lose";
+				SDL_Color c = (gamesTate->fighterWinner) ? SDL_Color{COLOR(0x00ff00ff)} : SDL_Color{COLOR(0xff0000ff)};
+				Texture msg(game_->getRenderer(), line, 
+					game_->getFontMngr()->getFont(Resources::ARIAL24), c);
+				msg.render(game_->getWindowWidth() / 2 - msg.getWidth() / 2, game_->getWindowHeight() - 2*msg.getHeight()-5);
+			}
+		}
 	}
 };
 

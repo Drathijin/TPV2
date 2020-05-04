@@ -23,11 +23,12 @@ public:
 		sc->points_++;
 
 		//se destruyen y se escucha una explosion
-		a->setActive(false);
+		AsteroidsPool::destroy(a);
+		a->removeFromGroup(ecs::_grp_Asteroid);
 		b->setActive(false);
 		game_->getAudioMngr()->playChannel(Resources::Explosion, 0);
-		Uint32 lifes = a->getComponent<AsteroidLifeTime>(ecs::AsteroidLifeTime)->generations_;
-		if ( lifes>= 0)
+		int lifes = a->getComponent<AsteroidLifeTime>(ecs::AsteroidLifeTime)->generations_;
+		if ( lifes> 0)
 			//si el asteroide puede generar sub-asteroides, busca dos asteroides en la pool y les asigna los valores necesarios
 		{
 			for (int i = 0; i < 2; i++)
@@ -44,11 +45,11 @@ public:
 			}
 			a->getComponent<AsteroidLifeTime>(ecs::AsteroidLifeTime)->generations_--;
 			//-1 asteroide que se destruye +2 que se crean
-			//numAsteroids++;
+			numOfAsteroids_++;
 		}
 
 		//-1 asteroide que se destruye
-		//else numAsteroids--;
+		else numOfAsteroids_--;
 	}
 
 	void addAsteroids(std::size_t n) {
@@ -79,12 +80,16 @@ public:
 			int r = game_->getRandGen()->nextInt(1, 180);
 			Uint32 lt = game_->getRandGen()->nextInt(1, 3);
 			int m = ran->nextInt(1, 2);
-			Entity* e = mngr_->addEntity<AsteroidsPool>(x, y, w, h, r, (c - pos).normalize() * (m),lt);
+			Entity* e = mngr_->addEntity<AsteroidsPool>(x, y, w, h, r, (c - pos).normalize() * (m),0);
 			if (e != nullptr)
 				e->addToGroup(ecs::_grp_Asteroid);
+			numOfAsteroids_++;
 		}
 	}
 
 	void update() override;
+	int getNumOfAsteroids() { return numOfAsteroids_; }
+private:
+	int numOfAsteroids_ = 0;
 };
 

@@ -96,7 +96,6 @@ private:
 	std::array<uptr_cmp, ecs::maxComponents> cmpArray_ = { };
 	std::bitset<ecs::maxGroups> groups_;
 
-
 	bool active_;
 };
 

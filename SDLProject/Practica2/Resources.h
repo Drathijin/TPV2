@@ -27,7 +27,8 @@ public:
 		// text
 		HelloWorld,
 		PressAnyKey,
-		GameOver,
+		GameOverLose,
+		GameOverWin
 	};
 
 	enum AudioId : std::size_t {

@@ -248,6 +248,9 @@
     <ClInclude Include="FighterGunSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Health.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
