@@ -39,7 +39,7 @@ public:
 
 	void update() override {
 
-		// draw stars
+		// draw asteroids and bullets
 		for (auto &e : mngr_->getGroupEntities(ecs::_grp_Asteroid)) {
 			draw(e);
 		}
@@ -53,11 +53,14 @@ public:
 		// draw score
 		drawScore();
 		GameState* gamesTate = mngr_->getHandler(ecs::_hdlr_GameState)->getComponent<GameState>(ecs::GameState);
+
 		// info message
 		if (!gamesTate->playing)
 		{
 			Texture msg(game_->getRenderer(),"Press ENTER to start", game_->getFontMngr()->getFont(Resources::ARIAL24),{COLOR(0xff0000ff)});
 			msg.render(game_->getWindowWidth()/2-msg.getWidth()/2,game_->getWindowHeight()-msg.getHeight()-10);
+
+			//if game is over, we show the player wether they've won or not
 			if (gamesTate->finished)
 			{
 				string line = (gamesTate->fighterWinner) ? "You win" : "You lose";

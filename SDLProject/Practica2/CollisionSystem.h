@@ -18,7 +18,8 @@ public:
 
 		for (auto& e : mngr_->getGroupEntities(ecs::_grp_Asteroid))
 		{
-
+			
+			//comprobamos todas las posibles colisiones del asteroide con:
 			if (e->isActive())
 			{
 				auto tr = e->getComponent<Transform>(ecs::Transform);
@@ -40,8 +41,7 @@ public:
 						{
 							mngr_->getSystem<AsteroidsSystem>(ecs::_sys_Asteroids)->onCollisionWithBullet(e, b);
 
-							
-							//if (asteroidPool_->getNumOfAsteroid() == 0)
+							//si ya no quedan asteroides, se termina el juego
 							if(mngr_->getSystem<AsteroidsSystem>(ecs::_sys_Asteroids)->getNumOfAsteroids() == 0)
 							{
 								ctrlSystem->onAsteroidsExtenction();

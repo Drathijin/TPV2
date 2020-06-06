@@ -12,10 +12,7 @@ public:
 
 	};
 	~FighterSystem(){};
-	void onCollisionWithAsteroid(Entity* a)
-	{
 
-	}
 	void init() override;
 	void update() override;
 
