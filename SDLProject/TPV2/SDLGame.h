@@ -6,6 +6,8 @@
 #include "AudioManager.h"
 #include "FontsManager.h"
 #include "RandomNumberGenerator.h"
+#include "InputHandler.h"
+#include "Networking.h"
 
 #include <string>
 #include <memory>
@@ -63,6 +65,23 @@ public:
 		return random_;
 	}
 
+	inline Networking* getNetworking() {
+		return networking_;
+	}
+
+	inline InputHandler* getInputHandler() const {
+		return InputHandler::instance();
+	}
+
+	inline void toggleFullScreen() {
+		int flags = SDL_GetWindowFlags(window_);
+		if (flags & SDL_WINDOW_FULLSCREEN) {
+			SDL_SetWindowFullscreen(window_, 0);
+		} else {
+			SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN);
+		}
+
+	}
 	inline Uint32 getTime() {
 		return SDL_GetTicks();
 	}
@@ -77,6 +96,7 @@ private:
 
 protected:
 
+	Networking *networking_;
 	FontsManager *fonts_;
 	TexturesManager *textures_;
 	AudioManager *audio_;

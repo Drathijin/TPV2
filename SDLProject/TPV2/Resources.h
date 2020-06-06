@@ -9,41 +9,35 @@ using namespace std;
 class Resources {
 public:
 
-	enum TextureId : int {
+	enum TextureId : std::size_t {
 		// images
-		Blank,
-		TennisBall,
-		KeyBoardIcon,
-		MouseIcon,
-		AIIcon,
-		SpaceShips,
-		Airplanes,
-		Star,
-		Heart,
-		Asteroid,
-		Bullet,
+		Fighter,
+		WhiteRect,
 
 		// text
-		HelloWorld,
-		PresAnyKey,
-		GameOverLose,
-		GameOverWin
+		PressEnter,
+		GameOver,
+		YouWin,
+		YouLose,
+		Draw,
+		WaitingForPlayer
 	};
 
-	enum AudioId : int {
+	enum AudioId : std::size_t {
 		// music
 		Beat,
 		Cheer,
 		Boooo,
-		Imperial_March,
 
 		// sound effects
-		Explosion,
-		GunShot
+		Wall_Hit,
+		Paddle_Hit,
+		RetroGameOverSound,
+		BonusBellSound
 	};
 
-	enum FontId : int {
-		ARIAL16, ARIAL24,
+	enum FontId : std::size_t {
+		ARIAL10, ARIAL12, ARIAL16, ARIAL24,
 	};
 
 	struct FontInfo {

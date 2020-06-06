@@ -33,10 +33,6 @@ void SDLGame::initSDL() {
 	SDL_WINDOWPOS_UNDEFINED,
 	SDL_WINDOWPOS_UNDEFINED, width_, height_, SDL_WINDOW_SHOWN);
 	assert(window_ != nullptr);
-	if (SDL_SetWindowFullscreen(window_, 0) == 0)
-	{
-		SDL_GetWindowSize(window_,&width_, &height_);
-	}
 
 	// Create the renderer
 	renderer_ = SDL_CreateRenderer(window_, -1,
@@ -44,7 +40,8 @@ void SDLGame::initSDL() {
 	assert(renderer_ != nullptr);
 
 	// Clear screen (background color).
-	int sdlSetDrawColor_ret = SDL_SetRenderDrawColor(renderer_, 0, 100, 100, 100);  // Dark grey.
+	int sdlSetDrawColor_ret = SDL_SetRenderDrawColor(renderer_, 0, 100, 100,
+			255);  // Dark grey.
 	assert(sdlSetDrawColor_ret != -1);
 	int sdlRenderClear_ret = SDL_RenderClear(renderer_);
 	assert(sdlRenderClear_ret != -1);
@@ -68,6 +65,8 @@ void SDLGame::closeSDL() {
 
 void SDLGame::initResources() {
 
+	networking_ = new Networking();
+
 	random_ = new SRandBasedGenerator();
 	random_->init();
 
@@ -90,7 +89,7 @@ void SDLGame::initResources() {
 
 	for (auto &txtmsg : Resources::messages_) {
 		textures_->loadFromText(txtmsg.id, renderer_, txtmsg.msg,
-				*fonts_->getFont(txtmsg.fontId), txtmsg.color);
+				fonts_->getFont(txtmsg.fontId), txtmsg.color);
 	}
 
 	for (auto &sound : Resources::sounds_) {
@@ -108,5 +107,6 @@ void SDLGame::closeResources() {
 	delete textures_;
 	delete random_;
 	delete audio_;
+	delete networking_;
 }
 
